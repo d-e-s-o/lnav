@@ -117,22 +117,31 @@ bool listview_curses::handle_key(int ch)
     case '\r':
     case 'j':
     case KEY_DOWN:
+    /*
+     * VIM's semantic of Ctrl+e is slightly different from j or key down
+     * in that it only moves the view, not the cursor, but since we do
+     * not have a cursor here the binding accomplishes the same task.
+     */
+    case KEY_CTRL_E:
         this->shift_top(vis_line_t(1));
         break;
 
     case 'k':
     case KEY_UP:
+    case KEY_CTRL_Y:
         this->shift_top(vis_line_t(-1));
         break;
 
     case 'b':
     case KEY_BACKSPACE:
     case KEY_PPAGE:
+    case KEY_CTRL_U:
         this->shift_top(-(this->rows_available(this->lv_top, RD_UP) - vis_line_t(1)));
         break;
 
     case ' ':
     case KEY_NPAGE:
+    case KEY_CTRL_D:
         this->shift_top(this->rows_available(this->lv_top, RD_DOWN) - vis_line_t(1));
         break;
 

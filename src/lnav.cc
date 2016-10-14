@@ -1596,7 +1596,6 @@ static void handle_key(int ch)
     lnav_data.ld_input_state.push_back(ch);
 
     switch (ch) {
-    case CEOF:
     case KEY_RESIZE:
         break;
     default:
@@ -1888,7 +1887,6 @@ static void looper(void)
                             continue;
                         }
                         switch (ch) {
-                        case CEOF:
                         case KEY_RESIZE:
                             break;
 
